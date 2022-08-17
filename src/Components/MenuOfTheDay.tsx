@@ -1,8 +1,8 @@
 import React from "react";
 import { dayNumberEnum } from "./MenuItemHandler";
 import { weeksMenu } from "../tmp/FoodStuffObject";
-import { Box, Image, Text, Heading } from "grommet/es6";
-import logo from "../Images/AllergyInfo/lemon.png";
+import { Box, Text } from "grommet/es6";
+import AllergenInfo from "./AllergenInfo";
 
 interface WelcomeProps {
   day: dayNumberEnum;
@@ -14,7 +14,7 @@ const MenuOfTheDay = (props: WelcomeProps) => {
   const isToday = props.isToday;
 
   return (
-    <Box pad={"small"} background={isToday ? "accent-4" : ""}>
+    <Box pad={"small"} background={isToday ? "neutral-3" : ""}>
       <Text size={"medium"} alignSelf={"center"}>
         {weeksMenu.mealdates[dayNumber].date}
       </Text>
@@ -26,22 +26,25 @@ const MenuOfTheDay = (props: WelcomeProps) => {
                 <Text>{value.category}</Text>
               </Box>
               <Box
-                gridArea="main"
                 pad={"small"}
                 background="light-2"
-                height={{ min: "120px", max: "120px" }}
+                height={{ min: "110px", max: "120px" }}
               >
                 <Text size={"small"} alignSelf={"center"}>
                   {value.title_en}.
                 </Text>
-                <Image
-                  alignSelf={"center"}
-                  src={logo}
-                  style={{ height: 20, width: 20 }}
-                />
-                {/* <Text>{value.additionalDietInfo?.allergens}.</Text>*/}
               </Box>
-              <Box gridArea="footer" align={"center"} background="light-3">
+              <Box
+                align={"center"}
+                background="light-3"
+                direction={"row-responsive"}
+              >
+                <AllergenInfo
+                  allergenString={value.additionalDietInfo?.allergens}
+                  additionalAllergens={value.recipes}
+                />
+              </Box>
+              <Box align={"center"} background="light-3">
                 <Text>{value.price}</Text>
               </Box>
             </Box>
