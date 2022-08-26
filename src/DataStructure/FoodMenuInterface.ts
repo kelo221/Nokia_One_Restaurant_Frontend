@@ -1,42 +1,55 @@
-export interface foodMenuInterface {
-  meta: Meta;
+export interface FoodMenuInterface {
+  meta:       Meta;
   timeperiod: string;
-  mealdates: Mealdate[];
+  mealdates:  Mealdate[];
 }
 
 export interface Mealdate {
-  date: string;
+  date:    string;
   courses: { [key: string]: Course };
 }
 
 export interface Course {
-  title_fi: string;
-  title_en: string;
-  category: string;
-  dietcodes?: string;
-  properties?: string;
-  additionalDietInfo?: AdditionalDietInfo;
-  price: string;
-  recipes?: Recipes;
+  title_fi:           string;
+  title_en:           string;
+  category:           string;
+  additionalDietInfo: AdditionalDietInfo;
+  price:              string;
+  recipes:            RecipesUnion;
+  dietcodes?:         string;
+  properties?:        string;
 }
 
 export interface AdditionalDietInfo {
-  dietcodeImages?: string[];
   allergens: string;
 }
 
-export interface Recipes {
-  "0": The0;
-  "1"?: The0;
-  "2"?: The0;
-  hideAll: HideAll;
-  "3"?: The0;
+export enum Category {
+  Bowl = "BOWL",
+  Favorites = "FAVORITES",
+  SoupAtCafe = "Soup at cafe",
+  Vege = "Vege",
 }
 
-export interface The0 {
-  name: string;
-  ingredients: any[];
-  nutrients: string;
+export enum Price {
+  The500500 = "5,00 € / 5,00 €",
+  The715915 = "7,15 € / 9,15 €",
+  The715980 = "7,15 € / 9,80 €",
+}
+
+export type RecipesUnion = Recipe[] | RecipesClass;
+
+export interface Recipe {
+  name:        string;
+  ingredients: string;
+  nutrients:   string;
+}
+
+export interface RecipesClass {
+  "0":     Recipe;
+  "1"?:    Recipe;
+  "2"?:    Recipe;
+  hideAll: HideAll;
 }
 
 export interface HideAll {
@@ -45,6 +58,6 @@ export interface HideAll {
 
 export interface Meta {
   generated_timestamp: number;
-  ref_url: string;
-  ref_title: string;
+  ref_url:             string;
+  ref_title:           string;
 }

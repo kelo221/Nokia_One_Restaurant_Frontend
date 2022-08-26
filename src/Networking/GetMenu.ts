@@ -1,4 +1,4 @@
-import { foodMenuInterface } from "../DataStructure/FoodMenuInterface";
+import { FoodMenuInterface } from "../DataStructure/FoodMenuInterface";
 
 export const getMenu = async () => {
   try {
@@ -16,7 +16,7 @@ export const getMenu = async () => {
       throw new Error(`Error! status: ${response.status}`);
     }
 
-    return (await response.json()) as foodMenuInterface;
+    return (await response.json()) as FoodMenuInterface;
   } catch (error) {
     if (error instanceof Error) {
       console.log("error message: ", error.message);
