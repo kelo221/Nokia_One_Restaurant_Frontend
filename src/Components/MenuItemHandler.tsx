@@ -3,6 +3,8 @@ import MenuOfTheDay from "./MenuOfTheDay";
 
 import { Grid } from "grommet";
 import { weeksMenu } from "../tmp/FoodStuffObject";
+import { FoodMenuInterface } from "../DataStructure/FoodMenuInterface";
+import { MenuProp } from "../DataStructure/FoodMenuInterface";
 
 export const enum dayNumberEnum {
   Monday,
@@ -15,15 +17,14 @@ export const enum dayNumberEnum {
 }
 
 const threeItemColum = [
-  ["xsmall", "small"], // column 2 is able to flex
-  ["xsmall", "small"], // column 2 is able to flex
-  ["xsmall", "small"], // column 2 is able to flex
-  ["xsmall", "small"], // column 2 is able to flex
-  ["xsmall", "small"], // column 2 is able to flex
+  ["xsmall", "medium"], // column 2 is able to flex
+  ["xsmall", "medium"], // column 2 is able to flex
+  ["xsmall", "medium"], // column 2 is able to flex
+  ["xsmall", "medium"], // column 2 is able to flex
+  ["xsmall", "medium"], // column 2 is able to flex
 ];
 
-// TODO map the days, this also prevents the missing days from causing problems
-const MenuItemHandler = () => {
+const MenuItemHandler = ({ menu }: MenuProp) => {
   // first day of the week is 0 in the USA, but we need it to be 0, saturday and sunday won't be used.
   let todaysDayNumber: dayNumberEnum = new Date().getDay()
     ? new Date().getDay() - 1
@@ -34,15 +35,19 @@ const MenuItemHandler = () => {
     todaysDayNumber = dayNumberEnum.Friday;
   }
 
-  //TODO why must I use index?
+  if (!Object.keys(menu).length) {
+    return null;
+  }
+
   return (
     <React.Fragment>
-      <Grid columns={threeItemColum} gap="xsmall" justifyContent={"center"}>
-        {weeksMenu.mealdates.map((arrDayNumber, index) => (
+      <Grid columns={threeItemColum} gap="none" justifyContent={"center"}>
+        {menu.mealdates.map((arrDayNumber, index) => (
           <MenuOfTheDay
             day={index}
             isToday={index === todaysDayNumber}
             key={index}
+            menu={menu}
           />
         ))}
       </Grid>

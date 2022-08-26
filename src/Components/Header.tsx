@@ -30,11 +30,6 @@ function MainHeader() {
           <Clock type="digital" />
         </Box>
       </Grid>
-
-      {/*<Box tag="header" background="brand" pad="small" align="center">
-        <Text>Nokia One Cafeteria Menu</Text>
-        <Clock type="digital" />
-      </Box>*/}
     </Box>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Image, Tip } from "grommet/es6";
+import { Box, Image, Tip, Text } from "grommet/es6";
 import { RecipesUnion } from "../DataStructure/FoodMenuInterface";
 
 interface AllergenField {
@@ -13,49 +13,61 @@ type allergen = {
   contains: boolean;
 };
 
+const foodChecker = (
+  checkedString: string | undefined,
+  ingredient: string
+): boolean => {
+  if (checkedString === undefined) {
+    return false;
+  }
+
+  console.log(checkedString, "LOOKING FOR ", ingredient);
+  return checkedString.toLowerCase().includes(ingredient);
+};
+
 const AllergenInfo = (props: AllergenField) => {
   const listOfAllergens: allergen[] = [
     {
       name: "Gluten",
       contains:
-        props.allergenString.toLowerCase().includes("gluteenia") ||
-        props.allergenString.includes("vehnä"),
+        foodChecker(props.allergenString, "gluten") ||
+        foodChecker(props.allergenString, "wheat"),
     },
     {
       name: "Crustaceans",
-      contains: props.allergenString.toLowerCase().includes("nilviäiset"),
+      contains: foodChecker(props.allergenString, "crustaceans"),
     },
     {
       name: "Milk",
-      contains: props.allergenString.toLowerCase().includes("maito"),
+      contains: foodChecker(props.allergenString, "milk"),
     },
     {
       name: "Seeds",
-      contains: props.allergenString.toLowerCase().includes("siemenet"),
+      contains: foodChecker(props.allergenString, "seeds"),
     },
     {
       name: "Eggs",
-      contains: props.allergenString.toLowerCase().includes("munat"),
+      contains: foodChecker(props.allergenString, "eggs"),
     },
     {
       name: "Soy",
-      contains: props.allergenString.toLowerCase().includes("soija"),
+      contains: foodChecker(props.allergenString, "soy"),
     },
     {
       name: "Celery",
-      contains: props.allergenString.toLowerCase().includes("selleri"),
+      contains: foodChecker(props.allergenString, "celery"),
     },
     {
       name: "Fish",
-      contains: props.allergenString.toLowerCase().includes("kala"),
+      contains: foodChecker(props.allergenString, "fish"),
     },
     {
       name: "Sulfur",
-      contains: props.allergenString.toLowerCase().includes("sulfiitit"),
+      contains: foodChecker(props.allergenString, "sulfits"),
     },
     {
       name: "Mustard",
-      contains: props.allergenString.toLowerCase().includes("sinappi"),
+      contains: foodChecker(props.allergenString, "mustard"),
     },
     {
       name: "Garlic", // INDEX 10
@@ -70,51 +82,58 @@ const AllergenInfo = (props: AllergenField) => {
   const garlicArrayIndex = 10;
   const onionArrayIndex = 11;
 
-  Object.entries(props.additionalAllergens).some(([, value]) => {
-    const dishIngredients = value.ingredients;
+  if (props.additionalAllergens !== undefined) {
+    Object.entries(props.additionalAllergens).some(([, value]) => {
+      const dishIngredients = value.ingredients;
 
-    if (dishIngredients !== undefined) {
-      if (
-        dishIngredients.toLowerCase().includes("valkosipuli") &&
-        !listOfAllergens[garlicArrayIndex].contains
-      ) {
-        listOfAllergens[garlicArrayIndex].contains = true;
+      if (dishIngredients !== undefined && dishIngredients.length !== 0) {
+        if (
+          dishIngredients.toLowerCase().includes("valkosipuli") &&
+          !listOfAllergens[garlicArrayIndex].contains
+        ) {
+          listOfAllergens[garlicArrayIndex].contains = true;
+        }
+
+        if (
+          dishIngredients.toLowerCase().includes("sipuli") &&
+          !listOfAllergens[onionArrayIndex].contains
+        ) {
+          listOfAllergens[onionArrayIndex].contains = true;
+        }
       }
-
-      if (
-        dishIngredients.toLowerCase().includes("sipuli") &&
-        !listOfAllergens[onionArrayIndex].contains
-      ) {
-        listOfAllergens[onionArrayIndex].contains = true;
-      }
-    }
-  });
-
-  console.log(process.env.PUBLIC_URL);
+    });
+  }
   return (
     <React.Fragment>
-      {listOfAllergens.map((allergen) => {
+      {listOfAllergens.map((allergen, index) => {
         if (allergen.contains) {
           const allergenName =
             allergen.name.charAt(0).toUpperCase() + allergen.name.slice(1);
           return (
-            <Tip content={allergenName}>
+            <Tip
+              key={index}
+              plain
+              content={
+                <Box
+                  pad="small"
+                  gap="small"
+                  width={{ max: "small" }}
+                  round="small"
+                  background="background-front"
+                  responsive={false}
+                >
+                  <Text>{allergenName}</Text>
+                </Box>
+              }
+            >
               <Image
                 src={require(`./../Images/AllergyInfo/${allergenName}.png`)}
-                style={{ height: 20, width: 20 }}
+                style={{ height: 20 }}
               />
             </Tip>
           );
         }
       })}
-
-      {/*      <Tip content="tooltip">
-        <Image src={Lemon} style={{ height: 20, width: 20 }} />
-      </Tip>
-
-      <Tip content="tooltip">
-        <Image src={Celery} style={{ height: 20, width: 20 }} />
-      </Tip>*/}
     </React.Fragment>
   );
 };
