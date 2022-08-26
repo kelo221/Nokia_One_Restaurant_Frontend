@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.js": "/Nokia_One_Restaurant_Frontend/static/js/main.bffd4a49.js",
+    "static/media/Soy.png": "/Nokia_One_Restaurant_Frontend/static/media/Soy.056e40b8a13c5b1d42d2.png",
+    "static/media/Gluten.png": "/Nokia_One_Restaurant_Frontend/static/media/Gluten.aa2b62aa9dd20431cb6b.png",
+    "static/media/Garlic.png": "/Nokia_One_Restaurant_Frontend/static/media/Garlic.f145c5dcfabfb7f483c9.png",
+    "static/media/Seeds.png": "/Nokia_One_Restaurant_Frontend/static/media/Seeds.2cee92e540ffd2097422.png",
+    "static/media/Onion.png": "/Nokia_One_Restaurant_Frontend/static/media/Onion.384522f684914d1b3a84.png",
+    "static/media/Celery.png": "/Nokia_One_Restaurant_Frontend/static/media/Celery.3b09731a904f17e20ee2.png",
+    "static/media/Lemon.png": "/Nokia_One_Restaurant_Frontend/static/media/Lemon.4fadd28be68defc3d796.png",
+    "static/media/Crustaceans.png": "/Nokia_One_Restaurant_Frontend/static/media/Crustaceans.437a167b1d769990355c.png",
+    "static/media/Mustard.png": "/Nokia_One_Restaurant_Frontend/static/media/Mustard.7ab650ead0cc76222a37.png",
+    "static/media/Eggs.png": "/Nokia_One_Restaurant_Frontend/static/media/Eggs.da59ee28909cc596221c.png",
+    "static/media/Sulfur.png": "/Nokia_One_Restaurant_Frontend/static/media/Sulfur.2170d7d7379d0f2f0c19.png",
+    "static/media/Fish.png": "/Nokia_One_Restaurant_Frontend/static/media/Fish.960570b805682d3f0761.png",
+    "static/media/Milk.png": "/Nokia_One_Restaurant_Frontend/static/media/Milk.b059cef4255b929adcd8.png",
+    "index.html": "/Nokia_One_Restaurant_Frontend/index.html",
+    "main.bffd4a49.js.map": "/Nokia_One_Restaurant_Frontend/static/js/main.bffd4a49.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.bffd4a49.js"
+  ]
+}
